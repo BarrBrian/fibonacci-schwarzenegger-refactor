@@ -27,7 +27,7 @@ deploy:
   provider: elasticbeanstalk
   region: 'us-east-2'
   app: 'multi-docker'
-  env: 'MultiDocker-env'
+  env: 'fibpro'
   bucket_name: 'elasticbeanstalk-us-east-2-308385786692'
   bucket_path: 'docker-multi'
   on:
