@@ -13,16 +13,27 @@ class Fib extends Component {
     this.fetchIndexes();
   }
 
+  componentDidUpdate() {
+    this.fetchValues();
+    this.fetchIndexes();
+  }
+
   async fetchValues() {
     const values = await axios.get('/api/values/current');
-    this.setState({ values: values.data });
+    if (
+      Object.keys(values.data).length !== Object.keys(this.stat.values).length
+    ) {
+      this.setState({ values: values.data });
+    }
   }
 
   async fetchIndexes() {
     const seenIndexes = await axios.get('/api/values/all');
-    this.setState({
-      seenIndexes: seenIndexes.data,
-    });
+    if (seenIndexes.data.length !== this.state.seenIndexes.length) {
+      this.setState({
+        seenIndexes: seenIndexes.data,
+      });
+    }
   }
 
   handleSubmit = async (event) => {
@@ -53,8 +64,6 @@ class Fib extends Component {
   }
 
   render() {
-    console.log('Fib component loaded');
-
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
