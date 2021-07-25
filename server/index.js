@@ -56,6 +56,7 @@ app.post('/values', async (req, res) => {
   const index = req.body.index;
 
   if (parseInt(index) > 40) {
+    console.log('The Crazies are trying to index', index);
     return res.status(422).send('Index too high');
   }
 
